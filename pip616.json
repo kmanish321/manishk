@@ -5,6 +5,9 @@
         "location":{
             "type":"string"
         },
+        "publicIpType":{
+            "type":"string"
+        },
         "pipname":{
             "type":"string"
     }},
@@ -15,7 +18,7 @@
             "apiVersion": "2016-03-30",
             "location": "[parameters('location')]",
             "properties": {
-                "publicIPAllocationMethod": "Dynamic",
+                "publicIPAllocationMethod": "[parameters('publicipType')]",
                 "idleTimeoutInMinutes": 4
             },
             "resources": [],
