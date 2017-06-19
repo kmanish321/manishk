@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters":{
         "location":{
-            "default value":"westus",
+            
             "type":"string"
         },
         "stgAccName":{
