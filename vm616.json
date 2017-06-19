@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters":{
+        "vmName":{
+            "type":"string"
+        },
+       "location":{
+        "type":"string"
+         },
+        
+        "adminUserName":{
+            "type":"string"
+        },
+        "adminPassword":{
+            "type":"string"
+        },
+         "storageAccountname":{
+             "type":"string"
+         },
+         "nicName":{
+             "type":"string"
+         }
+         },
+   "variables":{
+
+   },
+   "resources":[
+       {
+           "type":"Microsoft.Compute/virtualMachines",
+           "name":"[parameters('vmName')]",
+           "location":"[parameters('location')]",
+           "apiVersion": "2015-06-15",
+           "parameters":{
+               "hardwareProfile":{
+                   "vmSize": "Standard_DS2_v2"
+               },
+               "storageProfile":{
+                   "imageReference":{
+                       "publisher":"Canonical",
+                       "offer":"UbuntuServer",
+                       "sku":"16.10",
+                       "version":"latest"
+                   },
+                   "osDisk":{
+                       "name":"[parameters('vmName')]",
+                       "createOption":"FromImage",
+                       "vhd":{
+                           "uri": "[concat('https', '://', parameters('storageAccountname'), '.blob.core.windows.net', concat('/vhds/', parameters('vmname'),'-osdisk.vhd'))]"
+                       },
+                       "caching":"ReadWrite"
+                   },
+                   "dataDisks":[]
+               },
+               "osProfile": {
+                    "computerName": "[parameters('vmname')]",
+                    "adminUsername": "[parameters('adminUserName')]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicname'))]"
+                        }
+                    ]
+                },
+                "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts',parameters('storageAccountname'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicName'))]"
+                  ]  }
+
+
+
+
+
+       }
+   ]}
+         
