@@ -8,6 +8,21 @@
        "location":{
         "type":"string"
          },
+      "imagePublisher":{
+       "type":"string"
+      },
+      "imageOffer":{
+"type":"string"
+      },
+      "imageSKU":{
+"type":"string"
+      },
+    "imageVersion":{
+"type":"string"
+    },
+      "vmSize":{
+"type":"string"
+      },
         
         "adminUserName":{
             "type":"string"
@@ -33,14 +48,14 @@
            "apiVersion": "2015-06-15",
            "parameters":{
                "hardwareProfile":{
-                   "vmSize": "Standard_DS2_v2"
+                   "vmSize": "[parameters('vmSize')]"
                },
                "storageProfile":{
                    "imageReference":{
-                       "publisher":"Canonical",
-                       "offer":"UbuntuServer",
-                       "sku":"16.10",
-                       "version":"latest"
+                       "publisher":"[parameters('imagePublisher')]",
+                       "offer":"[parameters('imageOffer')]",
+                       "sku":"[parameters('imageSKU')]",
+                       "version":"[parameters('imageVersion')]"
                    },
                    "osDisk":{
                        "name":"[parameters('vmName')]",
@@ -79,4 +94,5 @@
 
        }
    ]}
+         
          
