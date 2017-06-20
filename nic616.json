@@ -1,31 +1,38 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":{
-        "nicname":{
-            "type":"string"
+    "parameters": {
+        "location": {
+            "type": "string"        
         },
-        "nsgname":{
-            "type":"string"
+        
+        
+        "nicName": {
+            "type": "string"
+            },
+        
+        "publicIpName": {
+            "type": "string"
+            },
+        "subnetRef": {
+            "type": "string"       
         },
-        "pipname":{
-            "type":"string"
-        },
-        "subnetRef":{
-            "type":"string"
-        },
-      
-        "location":{
-            "type":"string"
-        }
+        "nsgName":
+    {
+        "type": "string"
     },
-
-    "resources":[{
-
-    "type":"Microsoft.Network/networkInterfaces", 
-            "name": "[parameters('nicname')]",
+     "subnetRef": {
+            "type": "string"
+     }
+    
+    },
+    "variables": {},
+    "resources": [
+        {  
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('nicName')]",
             "apiVersion": "2016-03-30",
-            "location": "[parameters('location')]",
+            "location": "westus",
             "properties": {
                 "ipConfigurations": [
                     {
@@ -34,7 +41,7 @@
                             "privateIPAddress": "172.16.2.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pipname'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpName'))]"
                             },
                             "subnet": {
                                 "id": "[parameters('subnetRef')]"
@@ -47,9 +54,11 @@
                 },
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgname'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                 }
-            },
-            "resources": [],
-           
-        }]}
+            }
+        }  
+        
+    ]
+}
+
