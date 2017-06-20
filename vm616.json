@@ -24,13 +24,13 @@
 "type":"string"
       },
         
-        "adminUserName":{
+        "adminUsername":{
             "type":"string"
         },
         "adminPassword":{
             "type":"string"
         },
-         "storageAccountname":{
+         "stgAccName":{
              "type":"string"
          },
          "nicName":{
@@ -48,7 +48,7 @@
            "apiVersion": "2015-06-15",
            "parameters":{
                "hardwareProfile":{
-                   "vmSize": "[parameters('vmSize')]"
+                   "vmSize":"[parameters('vmSize')]"
                },
                "storageProfile":{
                    "imageReference":{
@@ -61,7 +61,7 @@
                        "name":"[parameters('vmName')]",
                        "createOption":"FromImage",
                        "vhd":{
-                           "uri": "[concat('https', '://', parameters('storageAccountname'), '.blob.core.windows.net', concat('/vhds/', parameters('vmname'),'-osdisk.vhd'))]"
+                           "uri": "[concat('https', '://', parameters('stgAccName'), '.blob.core.windows.net', concat('/vhds/', parameters('vmname'),'-osdisk.vhd'))]"
                        },
                        "caching":"ReadWrite"
                    },
@@ -69,7 +69,7 @@
                },
                "osProfile": {
                     "computerName": "[parameters('vmname')]",
-                    "adminUsername": "[parameters('adminUserName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false
                     },
@@ -84,7 +84,7 @@
                     ]
                 },
                 "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts',parameters('storageAccountname'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts',parameters('stgAccName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicName'))]"
                   ]  }
 
@@ -94,5 +94,4 @@
 
        }
    ]}
-         
          
