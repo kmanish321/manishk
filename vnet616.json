@@ -8,6 +8,9 @@
         "location":{
             "type":"string"
         },
+        "subnetName":{
+            "type":"string"
+        },
         "vnetaddressprefix":{
             "type":"string"
         },
@@ -31,7 +34,7 @@
                 },
                 "subnets": [
                     {
-                        "name": "default",
+                        "name": "[parameters('subnetName')]",
                         "properties": {
                             "addressPrefix": "[parameters('subnetaddressprefix')]"
                         }
