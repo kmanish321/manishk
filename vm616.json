@@ -61,14 +61,14 @@
                        "name":"[parameters('vmName')]",
                        "createOption":"FromImage",
                        "vhd":{
-                           "uri": "[concat('https', '://', parameters('stgAccName'), '.blob.core.windows.net', concat('/vhds/', parameters('vmname'),'-osdisk.vhd'))]"
+                           "uri": "[concat('https', '://', parameters('stgAccName'), '.blob.core.windows.net', concat('/vhds/', parameters('vmName'),'-osdisk.vhd'))]"
                        },
                        "caching":"ReadWrite"
                    },
                    "dataDisks":[]
                },
                "osProfile": {
-                    "computerName": "[parameters('vmname')]",
+                    "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false
@@ -94,4 +94,5 @@
 
        }
    ]}
+         
          
