@@ -11,6 +11,9 @@
         "pipname":{
             "type":"string"
         },
+        "subnetRef":{
+            "type":"string"
+        },
         "vnetname":{
             "type":"string"
         },
@@ -36,7 +39,7 @@
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pipname'))]"
                             },
                             "subnet": {
-                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname')), '/subnets/default')]"
+                                "id": "[parameters('subnetRef')]"
                             }
                         }
                     }
