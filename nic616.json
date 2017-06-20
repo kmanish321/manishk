@@ -14,9 +14,7 @@
         "subnetRef":{
             "type":"string"
         },
-        "vnetName":{
-            "type":"string"
-        },
+      
         "location":{
             "type":"string"
         }
@@ -53,9 +51,5 @@
                 }
             },
             "resources": [],
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pipname'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgname'))]"
-            ]
+           
         }]}
